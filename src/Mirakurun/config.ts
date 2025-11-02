@@ -112,7 +112,9 @@ export async function loadServer(): Promise<Server> {
 
     // Docker
     if (IS_DOCKER) {
-        config.path = "/var/run/mirakurun.sock";
+        if (!config.path) {
+            config.path = "/var/run/mirakurun.sock";
+        }
         if (DOCKER_NETWORK !== "host") {
             config.port = 40772;
             config.disableIPv6 = true;
